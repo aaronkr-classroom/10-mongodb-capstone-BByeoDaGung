@@ -5,6 +5,9 @@
 const port = 3000,
   layouts = require("express-ejs-layouts"), // Listing 12.7 (p. 179)
   express = require("express"),
+  homeController = require('./controllers/homeController'),
+  subscribersController = require("./controllers/subscribersController"),
+
   app = express();
 
 /**
@@ -14,7 +17,14 @@ const port = 3000,
  * 애플리케이션에 Mongoose 설정
  * ========================================
  */
-const mongoose = "";
+const mongoose = require("mongoose");
+mongoose.connect(
+  "mongodb+srv://choys:JapurFJhWUDgdWXZ@bbyeodagung.erqm11u.mongodb.net/?retryWrites=true&w=majority&appName=BByeoDaGung"
+);
+const db = mongoose.connection;
+db.once("open", () => {
+  console.log("Connected to MONGODB!!!");
+});
 
 app.set("port", process.env.PORT || port);
 
